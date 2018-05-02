@@ -9,8 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, MCBrowserViewControllerDelegate,
-MCSessionDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessionDelegate, UITextFieldDelegate {
     
     @IBOutlet var chatView: UITextView!
     @IBOutlet var messageField: UITextField!
@@ -24,6 +23,23 @@ MCSessionDelegate, UITextFieldDelegate {
         super.viewDidLoad()
         
         self.messageField.delegate = self
+        
+        self.peerID = MCPeerID(displayName: UIDevice.current.name)
+        self.session = MCSession(peer: self.peerID)
+        self.session.delegate = self
+        
+        // unique service name
+        let serviceType = "uacs-chat"
+        
+        // create a browser view controllaer with a unique service name
+        self.browser = MCBrowserViewController(serviceType: serviceType, session: self.session)
+        self.browser.delegate = self
+        
+        // create the assitant for handling peers
+        self.assistant = MCAdvertiserAssistant(serviceType: serviceType, discoveryInfo: nil, session: self.session)
+        
+        // assistant will start advertising
+        self.assistant.start()
     }
 
     func sendChat() {
@@ -32,7 +48,8 @@ MCSessionDelegate, UITextFieldDelegate {
 
     // Allows the user to join the chat
     @IBAction func Join(_ sender: Any) {
-
+        
+        self.present(self.browser, animated: true)
     }
     
     // Update the chat view with recent messages
