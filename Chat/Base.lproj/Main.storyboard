@@ -35,21 +35,37 @@
                                     <constraint firstAttribute="width" constant="240" id="6tt-cR-Vlb"/>
                                     <constraint firstAttribute="height" constant="375" id="grC-Ob-XbF"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvO-ue-T2Q">
+                                <rect key="frame" x="164.5" y="45" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="IX9-eR-ltz"/>
+                                    <constraint firstAttribute="height" constant="30" id="xvV-m9-lM7"/>
+                                </constraints>
+                                <state key="normal" title="Join"/>
+                                <connections>
+                                    <action selector="Join:" destination="BYZ-38-t0r" eventType="touchDown" id="kqm-7v-F22"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XyI-EQ-b1C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="88" id="4DP-BQ-QfR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tjc-E2-cWJ" secondAttribute="bottom" constant="70" id="Cu9-tO-5Lu"/>
                             <constraint firstItem="XyI-EQ-b1C" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EcW-US-a71"/>
+                            <constraint firstItem="WvO-ue-T2Q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="JJ4-LJ-BPz"/>
                             <constraint firstItem="XyI-EQ-b1C" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Tnx-V6-qCt"/>
                             <constraint firstItem="Tjc-E2-cWJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X8W-Av-Qwc"/>
+                            <constraint firstItem="WvO-ue-T2Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hDj-zw-8KS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="chatView" destination="Tjc-E2-cWJ" id="L9N-Ri-9ZR"/>
+                        <outlet property="messageField" destination="XyI-EQ-b1C" id="DDa-sW-xgH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
