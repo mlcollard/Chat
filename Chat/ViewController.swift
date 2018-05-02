@@ -24,7 +24,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         
         self.messageField.delegate = self
         
-        self.peerID = MCPeerID(displayName: UIDevice.current.name)
+        self.peerID = MCPeerID(displayName: UIDevice.current.name + " Seven")
         self.session = MCSession(peer: self.peerID)
         self.session.delegate = self
         
@@ -43,7 +43,21 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
 
     func sendChat() {
+        
+        // convert the string message into Data
+        guard let msg = self.messageField.text?.data(using: .utf8) else {
+            print("Error: ", #line)
+            return
+        }
 
+        // send the converted message
+        try? self.session.send(msg, toPeers: self.session.connectedPeers, with: .unreliable)
+
+        // update our own chat with the message we just sent
+        self.updateChat(name: "Local", text: self.messageField.text!)
+        
+        // clear out the message field since the message has been sent
+        self.messageField.text = ""
     }
 
     // Allows the user to join the chat
@@ -60,6 +74,15 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)  {
+        
+        // received data put on the main queue
+        DispatchQueue.main.async {
+            
+            // update the chat with the received message
+            let msg = String(decoding: data, as: UTF8.self)
+            
+            self.updateChat(name: peerID.displayName, text: msg as String)
+        }
 
     }
     
@@ -67,6 +90,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         self.messageField.resignFirstResponder()
+        
+        self.sendChat()
 
         // Note: implements default return key behavior
         return true
