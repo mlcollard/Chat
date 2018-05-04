@@ -42,6 +42,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         self.assistant.start()
     }
 
+    
+    
     func sendChat() {
         
         // convert the string message into Data
