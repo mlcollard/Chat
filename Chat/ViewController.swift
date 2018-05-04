@@ -41,8 +41,6 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         // assistant will start advertising
         self.assistant.start()
     }
-
-    
     
     func sendChat() {
         
